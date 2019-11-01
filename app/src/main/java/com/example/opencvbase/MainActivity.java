@@ -7,13 +7,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
+import android.widget.ImageView;
 
-
-public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener {
-    private CameraBridgeViewBase m_cameraView;
+public class MainActivity extends AppCompatActivity {
 
     static {
         System.loadLibrary("opencv_java4");
@@ -24,36 +20,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getPermissionCamera(this);
-
-        m_cameraView = findViewById(R.id.camera_view);
-        m_cameraView.setCvCameraViewListener(this);
-        m_cameraView.enableView();
+        ImageView imageView = findViewById(R.id.imageView);
+        getCameraPermission(this);
     }
 
-    public static boolean getPermissionCamera(Activity activity) {
+    public static void getCameraPermission(Activity activity) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            String[] permissions = new String[] {Manifest.permission.CAMERA};
-            ActivityCompat.requestPermissions(activity, permissions, 0);
-            return false;
-        } else {
-            return true;
+            String[] cameraPermissions = new String[] {Manifest.permission.CAMERA};
+            ActivityCompat.requestPermissions(activity, cameraPermissions, 0);
         }
     }
 
-    @Override
-    public void onCameraViewStarted(int width, int height) {
-
-    }
-
-    @Override
-    public void onCameraViewStopped() {
-
-    }
-
-        @Override
-    public Mat onCameraFrame(Mat inputFrame) {
-        Core.bitwise_not(inputFrame, inputFrame);
-        return inputFrame;
-    }
 }
