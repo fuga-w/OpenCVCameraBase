@@ -113,15 +113,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onImageAvailable(ImageReader reader) {
             Image image = reader.acquireLatestImage();
-            // Image.Plane plane = image.getPlanes()[0];
-            // ByteBuffer buffer =plane.getBuffer() ;
-            // byte[] bytes = new byte[buffer.remaining()];
-            // buffer.get(bytes);
-            Parcel parcel = Parcel.obtain();
-            HardwareBuffer hardwareBuffer = image.getHardwareBuffer();
-            hardwareBuffer.writeToParcel(parcel, 0);
-            byte[] bytes = {};
-            parcel.readByteArray(bytes);
+            Image.Plane plane = image.getPlanes()[0];
+            ByteBuffer buffer =plane.getBuffer() ;
+            byte[] bytes = new byte[buffer.remaining()];
+            buffer.get(bytes);
+            // Parcel parcel = Parcel.obtain();
+            // HardwareBuffer hardwareBuffer = image.getHardwareBuffer();
+            // hardwareBuffer.writeToParcel(parcel, 0);
+            // byte[] bytes = {};
+            // parcel.readByteArray(bytes);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             image.close();
             Mat mat = new Mat();
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             // SurfaceTexture texture = textureView.getSurfaceTexture();
             // Surface surface = new Surface(texture);
             captureRequestBuilder = cameraDevice.createCaptureRequest(cameraDevice.TEMPLATE_PREVIEW);
-            imageReader = ImageReader.newInstance(imageDimension.getWidth(), imageDimension.getHeight(), ImageFormat.PRIVATE, 1);
+            imageReader = ImageReader.newInstance(imageDimension.getWidth(), imageDimension.getHeight(), ImageFormat.JPEG, 1);
             Surface imageReaderSurface = imageReader.getSurface();
             captureRequestBuilder.addTarget(imageReaderSurface);
             cameraDevice.createCaptureSession(Arrays.asList(imageReaderSurface), new CameraCaptureSession.StateCallback() {
