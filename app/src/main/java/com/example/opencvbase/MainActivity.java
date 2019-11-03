@@ -1,5 +1,7 @@
 package com.example.opencvbase;
 
+// ---ライブラリの読み込み---
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,7 +27,8 @@ import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
-// 変数の宣言
+// ---変数の宣言---
+
     private TextureView textureView;
     private  String cameraId;
     protected CameraCaptureSession cameraCaptureSessions;
@@ -37,22 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
-// OpenCVをロード
+// ---OpenCVをロード---
     static {
         System.loadLibrary("opencv_java4");
 }
 
-
-
-    @Override
-
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        textureView = (TextureView) findViewById(R.id.textureView);
-        textureView.setSurfaceTextureListener(textureViewListener);
-    }
+// ---変数の定義---
 
     TextureView.SurfaceTextureListener textureViewListener = new TextureView.SurfaceTextureListener() {
 
@@ -95,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             cameraDevice = null;
         }
     };
+
+// ---ユーザー定義の関数---
 
     protected void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera Background");
@@ -166,5 +161,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    // ---メインの関数---
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textureView = (TextureView) findViewById(R.id.textureView);
+        textureView.setSurfaceTextureListener(textureViewListener);
     }
 }
