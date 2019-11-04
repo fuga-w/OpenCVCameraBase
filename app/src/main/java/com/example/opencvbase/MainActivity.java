@@ -2,50 +2,17 @@ package com.example.opencvbase;
 
 // ---ライブラリの読み込み---
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.ColorSpace;
-import android.graphics.ImageFormat;
-import android.graphics.SurfaceTexture;
-import android.hardware.HardwareBuffer;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraMetadata;
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.Image;
-import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Parcel;
-import android.util.Log;
-import android.util.Size;
-import android.view.Surface;
-import android.view.TextureView;
-import android.widget.ImageView;
-
 import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-
-
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener {
 
